@@ -17,8 +17,10 @@ void Spider::update()
   if(y >= 64){
     y = 64;
     ySpeed = 0;
+    canJump = true;
   } else {
     ySpeed -= 1;
+    canJump = false;
   }
   
   
@@ -91,7 +93,7 @@ void Spider::continueJumping(Arduboy2 arduboy){
 
 void Spider::startIdling(Arduboy2 arduboy){
   frameCounter = 0;
-  startFrame = arduboy.frameCount + idleFrameDelay / 4;
+  startFrame = arduboy.frameCount + 7;
   edgeMode = lastMode;
   continueIdling(arduboy);
 }

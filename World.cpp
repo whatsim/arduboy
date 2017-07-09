@@ -25,7 +25,7 @@ Shared::Gamemode World::loop(Arduboy2 arduboy)
     spider.xSpeed += 1;
     if(spider.xSpeed > 1) spider.xSpeed = 1;
   }
-  if(arduboy.justPressed(B_BUTTON)){
+  if(arduboy.justPressed(B_BUTTON) && spider.canJump){
     spider.ySpeed = 6;
   }
   

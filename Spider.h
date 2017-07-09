@@ -26,6 +26,7 @@ class Spider
     float ySpeed = 0;
     
     int health = 3;
+    bool canJump = true;
   private:
     Spidermode currentMode = idling;
     Spidermode lastMode = idling;
@@ -57,6 +58,7 @@ class Spider
     int frameCounter = 0;
     int lastDirection = 1;
     int startFrame = 0;
+
 };
 
 #endif
