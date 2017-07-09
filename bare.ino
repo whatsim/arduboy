@@ -18,13 +18,9 @@ Shared::Gamemode mode = Shared::dice;
 void setup() {
   
   //initiate arduboy instance
-//  arduboy.begin();
-  arduboy.boot(); // raw hardware
-  arduboy.blank(); // blank the display
+  arduboy.boot(); 
+  arduboy.blank(); 
   arduboy.audio.begin();
-
-  // here we set the framerate to 30, we do not need to run at default 60 and
-  // it saves us battery life.
   arduboy.setFrameRate(30);
 
 }

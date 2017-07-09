@@ -1,6 +1,8 @@
 #ifndef ASSETS_H
 #define ASSETS_H
 
+// genned with https://teamarg.github.io/arduboy-sprite-converter/
+
 const unsigned char PROGMEM sprite_pragmata[] =
 {
 // width, height,
