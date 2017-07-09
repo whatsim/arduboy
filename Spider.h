@@ -33,11 +33,10 @@ class Spider
     Spidermode edgeMode = idling;
     
     void startRunning(Arduboy2 arduboy);
-    void continueRunning(Arduboy2 arduboy);
-    void startJumping(Arduboy2 arduboy);
-    void continueJumping(Arduboy2 arduboy);
+    int continueRunning(Arduboy2 arduboy);
+    int continueJumping(Arduboy2 arduboy);
     void startIdling(Arduboy2 arduboy);
-    void continueIdling(Arduboy2 arduboy);
+    int continueIdling(Arduboy2 arduboy);
     
     const int startRunFrame = 3;
     const int numRunFrames = 3;

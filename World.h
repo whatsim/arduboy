@@ -7,6 +7,7 @@
 #include <Arduboy2.h>
 #include "Shared.h"
 #include "Assets.h"
+#include "Typewriter.h"
 #include "Spider.h"
 
 class World

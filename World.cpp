@@ -31,6 +31,11 @@ Shared::Gamemode World::loop(Arduboy2 arduboy)
   
   spider.update();
   spider.draw(arduboy);
+
+  Sprites::drawSelfMasked(20,20,sprite_platform,0);
+  Sprites::drawSelfMasked(27,20,sprite_platform,0);
+
+  Typewriter::numAt(0,0,round(millis()/1000));
   
   return mode;
 }
