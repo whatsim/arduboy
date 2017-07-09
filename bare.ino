@@ -5,15 +5,15 @@
 #include "Assets.h"
 
 // modes
-#include "Dice.h"
+#include "World.h"
 
 // Make an instance of arduboy used for many functions
 Arduboy2 arduboy;
 ArduboyTones sound(arduboy.audio.enabled);
 
-Dice dice = Dice();
+World world = World();
 
-Shared::Gamemode mode = Shared::dice;
+Shared::Gamemode mode = Shared::world;
 
 void setup() {
   
@@ -33,8 +33,8 @@ void loop() {
   arduboy.pollButtons();
 
   switch (mode){
-    case Shared::dice:
-      mode = dice.loop(arduboy);
+    case Shared::world:
+      mode = world.loop(arduboy);
     break;
   }
 
