@@ -13,6 +13,10 @@ void Spider::update()
 {
   x += xSpeed * xSpeedMult;
   y -= ySpeed * ySpeedMult;
+
+  // cheaty wrap
+  if(x > 150) x = -22;
+  if(x < -22) x = 150;
   
   if(y >= 64){
     y = 64;
