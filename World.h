@@ -5,6 +5,7 @@
 #define World_h
 
 #include <Arduboy2.h>
+#include <ArduboyTones.h>
 #include "Shared.h"
 #include "Assets.h"
 #include "Typewriter.h"
@@ -14,9 +15,14 @@ class World
 {
   public:
     World();
-    Shared::Gamemode loop(Arduboy2 arduboy);
+    Shared::Gamemode loop(Arduboy2 arduboy, ArduboyTones sound);
+    int getTile(int x, int y);
   private:
+    void updateCameraPos(Point pos);
     Spider spider;
+    Point cameraPos = Point();
+    void renderWorld();
+    
 };
 
 #endif

@@ -34,7 +34,7 @@ void loop() {
 
   switch (mode){
     case Shared::world:
-      mode = world.loop(arduboy);
+      mode = world.loop(arduboy,sound);
     break;
   }
 

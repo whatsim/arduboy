@@ -5,6 +5,7 @@
 #define Shared_h
 
 #include <Arduboy2.h>
+#include "Assets.h"
 
 namespace Shared
 {
@@ -13,6 +14,9 @@ namespace Shared
     typedef enum Gamemode {
   	  world
   	};
+    const int maxHealth = 3;
+    int getTile(int x, int y, bool world);
+    int getTileTop(int x, float y);
 };
 
 #endif
