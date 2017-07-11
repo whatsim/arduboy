@@ -15,18 +15,16 @@ Point Spider::update(ArduboyTones sounds)
   x += xSpeed * xSpeedMult;
   y -= ySpeed * ySpeedMult;
 
-  bool tileBelow = Shared::getTileTop(x,y) && Shared::getTile(x,y,true);
-
-  if(tileBelow && ySpeed < 0){
+  bool tileBelow = Shared::getTileTop(x,y) != 0;
+  if(tileBelow){
     
-    Serial.println("ground");
-    y = (int)(y / 16) * 16;
+    y = (int)((y) / 16) * 16;
     ySpeed = 0;
     if(!canJump){
       sounds.tone(NOTE_C1,100);
     }
     canJump = true;
-  } else if(!tileBelow){
+  } else {
     ySpeed -= 1;
     canJump = false;
   }

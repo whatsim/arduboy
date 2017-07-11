@@ -27,10 +27,11 @@ int Shared::getTile(int x, int y, bool world){
     x = x / 16;
     y = y / 16;
   }
-  if(x > 0 && y > 0 && x/2 * y < sizeof(map_one)){
+  if(x > 0 && y > 0 && x < map_one[0] && y < map_one[1]){
     int x8 = floor(x / 2);
-    char mapByte = pgm_read_byte(&map_one[x8 + y * 8]);
+    char mapByte = pgm_read_byte(&map_one[2 + x8 + y * map_one[0]/2]);
     if(x % 2 == 1) mapByte = mapByte >> 4;
+    
     return mapByte & 15;
   } else {
     return 0;
@@ -38,16 +39,8 @@ int Shared::getTile(int x, int y, bool world){
 }
 
 int Shared::getTileTop(int x, float y){
-  y = round((y - 1) / 16);
+  int intY = (int)(y)/16;
   x /= 16;
-  int intY = (int)y;
-  if(x > 0 && y > 0 && x/2 * y < sizeof(map_one)){
-    int x8 = floor(x / 2);
-    char mapByte = pgm_read_byte(&map_one[x8 + intY  * 8]);
-    if(x % 2 == 1) mapByte = mapByte >> 4;
-    return mapByte & 15;
-  } else {
-    return 0;
-  }
+  return getTile(x,intY,false) != 0;
 }
 

@@ -16,7 +16,6 @@ class World
   public:
     World();
     Shared::Gamemode loop(Arduboy2 arduboy, ArduboyTones sound);
-    int getTile(int x, int y);
   private:
     void updateCameraPos(Point pos);
     Spider spider;

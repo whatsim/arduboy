@@ -63,8 +63,8 @@ void World::updateCameraPos(Point pos){
 }
 
 void World::renderWorld(){
-  for(int x = 0; x < 16; x ++){
-    for(int y = 0; y < 8; y ++){
+  for(int x = 0; x < map_one[0]; x ++){
+    for(int y = 0; y < map_one[1]; y ++){
       int tile = Shared::getTile(x,y,false);
       if(tile != 0){
         Sprites::drawSelfMasked(x * 16 - cameraPos.x,y*16 - cameraPos.y,sprite_platform,tile-1);
