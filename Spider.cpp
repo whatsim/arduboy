@@ -12,20 +12,24 @@ Spider::Spider()
 Point Spider::update(ArduboyTones sounds)
 {
 
+  bool tileBelow = Shared::getTile(x,y,true) != 0;
+
+  Point s = Shared::speedAfterMapCollision(Point{x:x,y:y},Point{x:xSpeed,y:ySpeed});
+
+  xSpeed = s.x;
+  ySpeed = s.y;
+
   x += xSpeed * xSpeedMult;
   y -= ySpeed * ySpeedMult;
-
-  bool tileBelow = Shared::getTileTop(x,y) != 0;
+  
   if(tileBelow){
-    
-    y = (int)((y) / 16) * 16;
-    ySpeed = 0;
     if(!canJump){
       sounds.tone(NOTE_C1,100);
     }
     canJump = true;
   } else {
     ySpeed -= 1;
+    ySpeed = ySpeed > -10 ? ySpeed : -10;
     canJump = false;
   }
   
@@ -37,7 +41,8 @@ Point Spider::update(ArduboyTones sounds)
   if(ySpeed != 0 || !tileBelow){
     currentMode = jumping;
   }
-  
+
+  // return position to world
   return Point{x,y};
 }
 

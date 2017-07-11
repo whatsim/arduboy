@@ -16,7 +16,7 @@ namespace Shared
   	};
     const int maxHealth = 3;
     int getTile(int x, int y, bool world);
-    int getTileTop(int x, float y);
+    Point speedAfterMapCollision(Point position, Point speed);
 };
 
 #endif

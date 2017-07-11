@@ -38,9 +38,19 @@ int Shared::getTile(int x, int y, bool world){
   }
 }
 
-int Shared::getTileTop(int x, float y){
-  int intY = (int)(y)/16;
-  x /= 16;
-  return getTile(x,intY,false) != 0;
+Point Shared::speedAfterMapCollision(Point position, Point speed){
+  int xCoord = floor(position.x + speed.x);
+  int yCoord = floor(position.y + speed.y + 8); // 8 is the height of the spider
+  int tileID = getTile(xCoord,yCoord,false);
+  // should check if tileid allows a given direction of movement
+  // right now i only have platforms, and not other kinds of tile,
+  // so assuming it resists position y speed is enough.
+  if(tileID != 0){
+    if(speed.y > 0){
+      speed.y = yCoord - position.y;
+    }
+  }
+  // may not return fractional speed, need to make a float point?
+  return speed;
 }
 
