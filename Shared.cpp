@@ -43,7 +43,7 @@ Shared::FPoint Shared::speedAfterMapCollision(FPoint position, FPoint speed){
   int yCoord = ceil(position.y/16)*16; // 8 is the height of the spider
   int tileID = getTile(position.x + speed.x,position.y - speed.y,true);
 
-  if(tileID != 0){
+  if(tileID > 3){
     // is there a tile where you are going
     if(speed.y < 0){
       // are you falling

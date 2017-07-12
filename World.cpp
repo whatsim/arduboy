@@ -23,28 +23,20 @@ Shared::Gamemode World::loop(Arduboy2 arduboy,ArduboyTones sounds)
     if(spider.xSpeed > spider.horSpeed) spider.xSpeed = spider.horSpeed;
   }
 
-
-//
-//spider.ySpeed *= 0.8;
-//  if(abs(spider.ySpeed) < 0.1) spider.ySpeed = 0;
-//  if(arduboy.pressed(DOWN_BUTTON)){
-//    spider.ySpeed -= 4;
-//    if(spider.ySpeed < -4) spider.ySpeed = -4;
-//  }  
-//  if(arduboy.pressed(UP_BUTTON)){
-//    spider.ySpeed += 4;
-//    if(spider.ySpeed > 4) spider.ySpeed = 4;
-//  }
-//  
-
-  if(arduboy.justPressed(B_BUTTON) && spider.canJump){
-    spider.ySpeed = 8;
-  }
-  if(arduboy.justReleased(B_BUTTON) && spider.ySpeed > 0) spider.ySpeed = 0;
-  if(arduboy.justPressed(B_BUTTON)){
+  if(arduboy.pressed(DOWN_BUTTON) && arduboy.justPressed(B_BUTTON) && spider.canJump){
+    spider.y ++;
+  } else if(arduboy.justPressed(B_BUTTON) && spider.canJump){
+    spider.ySpeed = 6;
     sounds.tone(NOTE_C2,100);
   }
+  if(arduboy.justReleased(B_BUTTON) && spider.ySpeed > 0) spider.ySpeed = 0;
 
+  if(spider.y > 255){
+    spider.health --;
+    spider.x = spider.lastGroundX;
+    spider.y = spider.lastGroundY;
+  }
+  
   Point spiderPos = spider.update(sounds);
   updateCameraPos(spiderPos);
   renderWorld();
@@ -66,8 +58,8 @@ void World::updateCameraPos(Point pos){
   if(pos.x - cameraPos.x < 44){
     cameraPos.x = pos.x - 44;
   }
-  if(pos.y - cameraPos.y > 52){
-    cameraPos.y = pos.y - 52;
+  if(pos.y - cameraPos.y > 48){
+    cameraPos.y = pos.y - 48;
   }
   if(pos.y - cameraPos.y < 30){
     cameraPos.y = pos.y - 30;
@@ -75,12 +67,12 @@ void World::updateCameraPos(Point pos){
 }
 
 void World::renderWorld(){
-  for(int x = 0; x < map_one[0]; x ++){
-    for(int y = 0; y < map_one[1]; y ++){
+  for(int x = 1; x < map_one[0]; x ++){
+    for(int y = 1; y < map_one[1]; y ++){
       int tile = Shared::getTile(x,y,false);
-      if(tile != 0){
-        Sprites::drawSelfMasked(x * 16 - cameraPos.x,y*16 - cameraPos.y,sprite_platform,tile-1);
-      }
+      
+      Sprites::drawSelfMasked(x * 16 - cameraPos.x,y*16 - cameraPos.y,sprite_tiles,tile);
+      
     }
   }
 }

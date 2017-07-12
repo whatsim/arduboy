@@ -32,7 +32,10 @@ class Spider
 
     const int spriteCenterX = 13;
     const int spriteCenterY = 9;
-    const int horSpeed = 3;
+    
+    const int horSpeed = 4;
+    int lastGroundX = 0;
+    int lastGroundY = 0;
   private:
     Spidermode currentMode = idling;
     Spidermode lastMode = idling;
@@ -59,6 +62,8 @@ class Spider
     int frameCounter = 0;
     int lastDirection = 1;
     int startFrame = 0;
+
+    bool wasTileBelow = false;
 
 };
 
