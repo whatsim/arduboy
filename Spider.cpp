@@ -21,7 +21,7 @@ Point Spider::update(ArduboyTones sounds)
   ySpeed = s.y;
 
   
-  bool tileBelow = ySpeed == 0 && Shared::getTile(x,y,true) > 3;
+  bool tileBelow = ySpeed == 0 && Shared::getTile(x,y,true) > 6;
 
   x += xSpeed;
   y -= ySpeed;

@@ -27,7 +27,7 @@ int Shared::getTile(int x, int y, bool world){
     x = x / 16;
     y = y / 16;
   }
-  if(x > 0 && y > 0 && x < map_one[0] && y < map_one[1]){
+  if(x >= 0 && y >= 0 && x < map_one[0] && y < map_one[1]){
     int x8 = floor(x / 2);
     char mapByte = pgm_read_byte(&map_one[2 + x8 + y * map_one[0]/2]);
     if(x % 2 == 1) mapByte = mapByte >> 4;
@@ -43,7 +43,7 @@ Shared::FPoint Shared::speedAfterMapCollision(FPoint position, FPoint speed){
   int yCoord = ceil(position.y/16)*16; // 8 is the height of the spider
   int tileID = getTile(position.x + speed.x,position.y - speed.y,true);
 
-  if(tileID > 3){
+  if(tileID > 6){
     // is there a tile where you are going
     if(speed.y < 0){
       // are you falling
