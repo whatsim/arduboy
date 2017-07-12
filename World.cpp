@@ -31,7 +31,7 @@ Shared::Gamemode World::loop(Arduboy2 arduboy,ArduboyTones sounds)
   }
   if(arduboy.justReleased(B_BUTTON) && spider.ySpeed > 0) spider.ySpeed = 0;
 
-  if(spider.y > 255){
+  if(spider.y > map_one[1] * 1.5 * 16){
     spider.health --;
     spider.x = spider.lastGroundX;
     spider.y = spider.lastGroundY;
@@ -67,8 +67,8 @@ void World::updateCameraPos(Point pos){
 }
 
 void World::renderWorld(){
-  for(int x = 1; x < map_one[0]; x ++){
-    for(int y = 1; y < map_one[1]; y ++){
+  for(int x = 0; x < map_one[0]; x ++){
+    for(int y = 0; y < map_one[1]; y ++){
       int tile = Shared::getTile(x,y,false);
       
       Sprites::drawSelfMasked(x * 16 - cameraPos.x,y*16 - cameraPos.y,sprite_tiles,tile);
