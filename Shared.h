@@ -9,14 +9,20 @@
 
 namespace Shared
 {
+    const int maxHealth = 3;
     float lerp(float a, float b, float f);
     void shuffle(int *array, size_t n);
+    int getTile(int x, int y, bool world);
+    
     typedef enum Gamemode {
   	  world
   	};
-    const int maxHealth = 3;
-    int getTile(int x, int y, bool world);
-    Point speedAfterMapCollision(Point position, Point speed);
+    struct FPoint {
+        float x; 
+        float y;
+    };  
+    FPoint speedAfterMapCollision(FPoint position, FPoint speed);
 };
 
 #endif
+

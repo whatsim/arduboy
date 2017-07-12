@@ -29,3 +29,4 @@ void Typewriter::numAt(int x,int y,int digit)
   int charIndex = digit;
   Sprites::drawSelfMasked(x,y,sprite_pragmata,digit);
 }
+

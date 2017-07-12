@@ -14,16 +14,28 @@ Shared::Gamemode World::loop(Arduboy2 arduboy,ArduboyTones sounds)
 {
   Shared::Gamemode mode = Shared::world;
 
-  spider.xSpeed *= 0.8;
-  if(abs(spider.xSpeed) < 0.1) spider.xSpeed = 0;
   if(arduboy.pressed(LEFT_BUTTON)){
-    spider.xSpeed -= 1;
-    if(spider.xSpeed < -1) spider.xSpeed = -1;
+    spider.xSpeed -= spider.horSpeed;
+    if(abs(spider.xSpeed) > spider.horSpeed) spider.xSpeed = -spider.horSpeed;
   }  
   if(arduboy.pressed(RIGHT_BUTTON)){
-    spider.xSpeed += 1;
-    if(spider.xSpeed > 1) spider.xSpeed = 1;
+    spider.xSpeed += spider.horSpeed;
+    if(spider.xSpeed > spider.horSpeed) spider.xSpeed = spider.horSpeed;
   }
+
+
+//
+//spider.ySpeed *= 0.8;
+//  if(abs(spider.ySpeed) < 0.1) spider.ySpeed = 0;
+//  if(arduboy.pressed(DOWN_BUTTON)){
+//    spider.ySpeed -= 4;
+//    if(spider.ySpeed < -4) spider.ySpeed = -4;
+//  }  
+//  if(arduboy.pressed(UP_BUTTON)){
+//    spider.ySpeed += 4;
+//    if(spider.ySpeed > 4) spider.ySpeed = 4;
+//  }
+//  
 
   if(arduboy.justPressed(B_BUTTON) && spider.canJump){
     spider.ySpeed = 8;
@@ -72,3 +84,4 @@ void World::renderWorld(){
     }
   }
 }
+

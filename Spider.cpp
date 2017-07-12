@@ -12,23 +12,26 @@ Spider::Spider()
 Point Spider::update(ArduboyTones sounds)
 {
 
-  bool tileBelow = Shared::getTile(x,y,true) != 0;
-
-  Point s = Shared::speedAfterMapCollision(Point{x:x,y:y},Point{x:xSpeed,y:ySpeed});
+  ySpeed -= 1;
+  Shared::FPoint s = Shared::speedAfterMapCollision({x:x,y:y},{x:xSpeed,y:ySpeed});
 
   xSpeed = s.x;
   ySpeed = s.y;
 
-  x += xSpeed * xSpeedMult;
-  y -= ySpeed * ySpeedMult;
+  bool tileBelow = ySpeed == 0 && Shared::getTile(x,y,true) != 0;
+
+  x += xSpeed;
+  y -= ySpeed;
   
   if(tileBelow){
     if(!canJump){
       sounds.tone(NOTE_C1,100);
     }
+    xSpeed *= 0.9;
+    if(abs(xSpeed) < 0.1) xSpeed = 0;
     canJump = true;
   } else {
-    ySpeed -= 1;
+    
     ySpeed = ySpeed > -10 ? ySpeed : -10;
     canJump = false;
   }
@@ -113,5 +116,6 @@ int Spider::continueIdling(Arduboy2 arduboy){
   frameCounter = frameCounter % numIdleFrames;
   return frame;
 }
+
 
 

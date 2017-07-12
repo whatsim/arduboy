@@ -38,19 +38,27 @@ int Shared::getTile(int x, int y, bool world){
   }
 }
 
-Point Shared::speedAfterMapCollision(Point position, Point speed){
-  int xCoord = floor(position.x + speed.x);
-  int yCoord = floor(position.y + speed.y + 8); // 8 is the height of the spider
-  int tileID = getTile(xCoord,yCoord,false);
-  // should check if tileid allows a given direction of movement
-  // right now i only have platforms, and not other kinds of tile,
-  // so assuming it resists position y speed is enough.
+Shared::FPoint Shared::speedAfterMapCollision(FPoint position, FPoint speed){
+  int xCoord = ceil(position.x/16)*16;
+  int yCoord = ceil(position.y/16)*16; // 8 is the height of the spider
+  int tileID = getTile(position.x + speed.x,position.y - speed.y,true);
+
   if(tileID != 0){
-    if(speed.y > 0){
-      speed.y = yCoord - position.y;
+    // is there a tile where you are going
+    if(speed.y < 0){
+      // are you falling
+      if(position.y <= yCoord){
+        // is where you were above the tile
+        speed.y = abs(position.y - yCoord) < abs(speed.y) ? position.y - yCoord : speed.y;
+        Serial.println("xxx");
+        Serial.println(yCoord);
+        Serial.println(position.y);
+//        speed.y = speed.y > 0 ? 0 : speed.y;
+      }
     }
   }
-  // may not return fractional speed, need to make a float point?
+  
   return speed;
 }
+
 
